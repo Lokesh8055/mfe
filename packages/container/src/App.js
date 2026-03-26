@@ -10,6 +10,7 @@ const App = () => {
 
   return (
     <>
+      <h1>Hello Container!</h1>
       <div ref={marketingRef}></div>
     </>
   );
