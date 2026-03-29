@@ -9,13 +9,23 @@ const mountMarketing = (el, { onNavigate } = {}) => {
   if (onNavigate) {
     history.listen(onNavigate);
   }
+
   ReactDOM.render(
     <React.StrictMode>
       <App history={history} />
     </React.StrictMode>,
     el
   );
-};
+
+  return {
+    onParentNavigate({ pathname: nextPathname }) {
+      const { pathname } = history.location;
+      if (pathname !== nextPathname) {
+        history.push(nextPathname);
+      }
+    }
+  };
+}
 
 // If we are in development and in isolation, call mount immediately
 if (process.env.NODE_ENV === 'development') {
